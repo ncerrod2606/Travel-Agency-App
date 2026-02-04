@@ -22,9 +22,6 @@ class ReservaController extends Controller {
         $result = false;
         $txtMessage = 'Error al realizar la reserva.';
         
-        // Prevent duplicate bookings? Or allow? Prompt says "RESERVA: id, iduser, idvacacion".
-        // Usually one booking per package per user is enough for basic logic.
-        // I'll leave it as is, allow multiple or just save.
         
         $reserva = new Reserva();
         $reserva->iduser = Auth::id();

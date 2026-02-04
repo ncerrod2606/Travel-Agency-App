@@ -33,7 +33,6 @@ class ComentarioController extends Controller {
         $result = false;
         $txtMessage = 'No se ha podido agregar el comentario';
         
-        // Validation: User must have reserved the vacation
         $hasReserved = Reserva::where('iduser', Auth::id())
                               ->where('idvacacion', $request->idvacacion)
                               ->exists();
@@ -43,7 +42,7 @@ class ComentarioController extends Controller {
         }
 
         $comentario = new Comentario($request->all());
-        $comentario->iduser = Auth::id(); // Assign current user
+        $comentario->iduser = Auth::id();
         
         try {
             $result = $comentario->save();

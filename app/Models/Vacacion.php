@@ -13,11 +13,14 @@ class Vacacion extends Model {
     protected $fillable = ['titulo', 'descripcion', 'precio', 'idtipo', 'pais'];
 
     function getPath(): string {
-        $path = url('assets/img/placeholder.jpg'); // Default placeholder
+        $path = url('assets/img/noimage.jpg'); // Changed to noimage.jpg
         $foto = $this->fotos->first();
-        if($foto != null &&
-                file_exists(storage_path('app/public') . '/' . $foto->ruta)) {
-            $path = url('storage/' . $foto->ruta);
+        if($foto != null) {
+            if (file_exists(storage_path('app/public') . '/' . $foto->ruta)) {
+                $path = url('storage/' . $foto->ruta);
+            } elseif (file_exists(public_path($foto->ruta))) {
+                 $path = url($foto->ruta);
+            }
         }
         return $path;
     }

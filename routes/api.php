@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\ApiPeinadoController;
+use App\Http\Controllers\ApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -8,5 +8,5 @@ use Illuminate\Support\Facades\Route;
     return $request->user();
 })->middleware('auth:sanctum');*/
 
-Route::apiResource('peinado', ApiPeinadoController::class)->names('apipeinado');
-Route::get('guzzle/{id?}', [ApiPeinadoController::class, 'guzzle'])->name('apipeinado.guzzle');
+Route::apiResource('peinado', ApiController::class)->names('apipeinado');
+Route::get('guzzle/{id?}', [ApiController::class, 'guzzle'])->name('apipeinado.guzzle');

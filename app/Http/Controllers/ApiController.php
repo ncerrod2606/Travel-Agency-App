@@ -8,7 +8,7 @@ use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 
-class ApiPeinadoController extends Controller
+class ApiController extends Controller
 {
 
     use JsonTrait;

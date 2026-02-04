@@ -36,14 +36,10 @@ class VacacionController extends Controller
             return redirect()->route('home');
         }
         try {
-            // Delete associated photos from storage before deleting record?
-            // Cascade delete deals with DB rows. 
-            // Ideally we delete files too.
             foreach($vacacion->fotos as $foto) {
                  if(Storage::disk('public')->exists($foto->ruta)) {
                     Storage::disk('public')->delete($foto->ruta);
                  }
-                // also local? Barbershop stored in 'public' and 'local'.
             }
             
             $result = $vacacion->delete();
@@ -92,7 +88,6 @@ class VacacionController extends Controller
             return redirect()->route('home');
         }
         $vacacion = new Vacacion($request->all());
-        // $vacacion->iduser = Auth::user()->id; // Removed as not in VACACION spec
         $result = false;
         try {
             $result = $vacacion->save();
@@ -100,7 +95,6 @@ class VacacionController extends Controller
             
             if($request->hasFile('image')) {
                 $ruta = $this->upload($request, $vacacion);
-                // Create Foto entry
                 $foto = new Foto();
                 $foto->idvacacion = $vacacion->id;
                 $foto->ruta = $ruta;
@@ -130,10 +124,8 @@ class VacacionController extends Controller
         }
         $result = false;
         
-        // Handle image deletion logic if requested?
         if($request->deleteImage == 'true') {
              foreach($vacacion->fotos as $foto) {
-                 // Delete file
                  $foto->delete();
              }
         }
@@ -142,10 +134,6 @@ class VacacionController extends Controller
         
         try {
             if($request->hasFile('image')) {
-                // If replacing, maybe delete old ones?
-                // For simplicity, let's append or just add.
-                // Or if logic implies "Main Image", delete old.
-                // I'll assume add.
                 $ruta = $this->upload($request, $vacacion);
                 $foto = new Foto();
                 $foto->idvacacion = $vacacion->id;
@@ -173,7 +161,6 @@ class VacacionController extends Controller
 
     private function upload(Request $request, Vacacion $vacacion): string {
         $image = $request->file('image');
-        // Use unique name
         $name = $vacacion->id . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
         $ruta = $image->storeAs('vacacion', $name, 'public');
         $this->storeLocal($image, $name);

@@ -14,13 +14,12 @@ class VacacionSeeder extends Seeder
 {
     public function run(): void
     {
-        // Users
         $admin = User::create([
             'name' => 'Admin User',
             'email' => 'admin@travel.com',
             'password' => Hash::make('password'),
             'rol' => 'admin',
-             'email_verified_at' => now(), // Verify email
+             'email_verified_at' => now(),
         ]);
         
         $user = User::create([
@@ -31,14 +30,11 @@ class VacacionSeeder extends Seeder
             'email_verified_at' => now(),
         ]);
 
-        // Tipos
         $playa = Tipo::create(['nombre' => 'Playa']);
         $montana = Tipo::create(['nombre' => 'Montaña']);
         $ciudad = Tipo::create(['nombre' => 'Ciudad']);
         $crucero = Tipo::create(['nombre' => 'Crucero']);
 
-        // Vacaciones
-        // Vacaciones & Fotos
         $v1 = Vacacion::create([
             'titulo' => 'Caribe Relax',
             'descripcion' => 'Disfruta de las mejores playas del Caribe con todo incluido. Un paraíso terrenal te espera.',

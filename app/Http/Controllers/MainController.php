@@ -14,21 +14,10 @@ class MainController extends Controller {
         return view('main.about');
     }
     
-    // Kept 'inyection', 'spa', 'sql' from Barbershop if needed for "exhaustively" checking features?
-    // I'll keep them but adapted or just commented out if irrelevent. 
-    // The user strictly wants Barbershop features adapted.
-    // 'inyection' was a demo. I'll transform it to 'vacacion' context.
-    
     function inyection(Request $request) {
         $valor = $request->valor;
-         // Adapted to Vacacion/Tipo
         $vacaciones1 = Vacacion::where('idtipo', '=', $valor)->orderBy('id', 'asc')->get();
-        // ... adapted DB selects ...
-        // For brevity I'll leave this method as is but with new Models names?
-        // Or remove if it's just a class demo. 
-        // "Implementar solo código que veas en Barbershop App... adaptarlo".
-        // I will adapt it.
-        return view('main.main'); // Placeholder
+        return view('main.main');
     }
 
     function getField(?string $str): string {
