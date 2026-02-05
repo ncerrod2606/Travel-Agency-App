@@ -84,6 +84,7 @@ class VacacionController extends Controller
     }
 
     function store(VacacionCreateRequest $request): RedirectResponse {
+        \Illuminate\Support\Facades\Log::info('Store method called');
         if(Auth::user()->rol != 'admin' && Auth::user()->rol != 'advanced') {
             return redirect()->route('home');
         }
@@ -94,11 +95,16 @@ class VacacionController extends Controller
             $txtmessage = 'La vacación ha sido añadida.';
             
             if($request->hasFile('image')) {
+                \Illuminate\Support\Facades\Log::info('Image detected in request');
                 $ruta = $this->upload($request, $vacacion);
+                \Illuminate\Support\Facades\Log::info('Image uploaded to: ' . $ruta);
                 $foto = new Foto();
                 $foto->idvacacion = $vacacion->id;
                 $foto->ruta = $ruta;
                 $foto->save();
+                \Illuminate\Support\Facades\Log::info('Foto record saved with ID: ' . $foto->id);
+            } else {
+                \Illuminate\Support\Facades\Log::info('No image detected in request');
             }
             
         } catch(UniqueConstraintViolationException $e) {

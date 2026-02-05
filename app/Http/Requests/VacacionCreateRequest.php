@@ -57,4 +57,10 @@ class VacacionCreateRequest extends FormRequest
             'image'       => 'nullable|image' // Form field 'image'
         ];
     }
+
+    protected function failedValidation(\Illuminate\Contracts\Validation\Validator $validator)
+    {
+        \Illuminate\Support\Facades\Log::error('Vacacion validation failed', $validator->errors()->toArray());
+        parent::failedValidation($validator);
+    }
 }
