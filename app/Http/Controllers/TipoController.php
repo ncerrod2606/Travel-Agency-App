@@ -10,7 +10,7 @@ use Illuminate\View\View;
 class TipoController extends Controller {
 
     function create(): View {
-        return view('tipo.create'); // Placeholder if needed
+        return view('tipo.create'); 
     }
 
     function destroy(Tipo $tipo): RedirectResponse {
