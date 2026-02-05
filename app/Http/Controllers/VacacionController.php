@@ -67,7 +67,7 @@ class VacacionController extends Controller
     }
 
     function index(): View {
-        $vacaciones = Vacacion::all();
+        $vacaciones = Vacacion::paginate(10);
         return view('vacacion.index', ['vacaciones' => $vacaciones]);
     }
 

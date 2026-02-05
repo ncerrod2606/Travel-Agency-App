@@ -19,6 +19,7 @@ class VacacionCreateRequest extends FormRequest
     }
 
     function authorize(): bool {
+        \Illuminate\Support\Facades\Log::info('VacacionCreateRequest authorize called');
         return true;
     }
 

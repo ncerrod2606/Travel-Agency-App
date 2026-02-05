@@ -9,44 +9,61 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <ul>
-            <li>
-                <a class="btn btn-link mb-2"
-                    href="{{ route('main', array_merge(['field' => 1, 'order' => 2], request()->except('field', 'order', 'page'))) }}">
-                    Las más recientes
-                </a>
-            </li>
-            <li>
-                <a class="btn btn-link mb-2"
-                    href="{{ route('main', array_merge(['field' => 1, 'order' => 1], request()->except('field', 'order', 'page'))) }}">
-                    Las más antiguas
-                </a>
-            </li>
-            <li>
-                <a class="btn btn-link mb-2"
-                    href="{{ route('main', array_merge(['field' => 2, 'order' => 1], request()->except('field', 'order', 'page'))) }}">
-                    Las más baratas
-                </a>
-            </li>
-            <li>
-                <a class="btn btn-link mb-2"
-                    href="{{ route('main', array_merge(['field' => 2, 'order' => 2], request()->except('field', 'order', 'page'))) }}">
-                    Las más caras
-                </a>
-            </li>
-            <li>
-                <a class="btn btn-link mb-2"
-                    href="{{ route('main', array_merge(['field' => 3, 'order' => 1], request()->except('field', 'order', 'page'))) }}">
-                    Tipo (A-Z)
-                </a>
-            </li>
-            <li>
-                <a class="btn btn-link mb-2"
-                    href="{{ route('main', array_merge(['field' => 3, 'order' => 2], request()->except('field', 'order', 'page'))) }}">
-                    Tipo (Z-A)
-                </a>
-            </li>
-        </ul>
+        <div class="list-group list-group-flush">
+            <a href="{{ route('main', array_merge(['field' => 1, 'order' => 2], request()->except('field', 'order', 'page'))) }}" 
+               class="list-group-item list-group-item-action d-flex align-items-center gap-3 py-3">
+                <i class="fas fa-calendar-alt text-primary fa-lg" style="width: 25px;"></i>
+                <div>
+                    <h6 class="mb-0 fw-bold">Las más recientes</h6>
+                    <small class="text-muted">Orden cronológico inverso</small>
+                </div>
+            </a>
+            
+            <a href="{{ route('main', array_merge(['field' => 1, 'order' => 1], request()->except('field', 'order', 'page'))) }}" 
+               class="list-group-item list-group-item-action d-flex align-items-center gap-3 py-3">
+                <i class="fas fa-history text-secondary fa-lg" style="width: 25px;"></i>
+                <div>
+                    <h6 class="mb-0">Las más antiguas</h6>
+                    <small class="text-muted">Orden cronológico</small>
+                </div>
+            </a>
+
+            <a href="{{ route('main', array_merge(['field' => 2, 'order' => 1], request()->except('field', 'order', 'page'))) }}" 
+               class="list-group-item list-group-item-action d-flex align-items-center gap-3 py-3">
+                <i class="fas fa-tag text-success fa-lg" style="width: 25px;"></i>
+                <div>
+                    <h6 class="mb-0">Las más baratas</h6>
+                    <small class="text-muted">Precio ascendente</small>
+                </div>
+            </a>
+
+            <a href="{{ route('main', array_merge(['field' => 2, 'order' => 2], request()->except('field', 'order', 'page'))) }}" 
+               class="list-group-item list-group-item-action d-flex align-items-center gap-3 py-3">
+                <i class="fas fa-dollar-sign text-danger fa-lg" style="width: 25px;"></i>
+                <div>
+                    <h6 class="mb-0">Las más caras</h6>
+                    <small class="text-muted">Precio descendente</small>
+                </div>
+            </a>
+
+            <a href="{{ route('main', array_merge(['field' => 3, 'order' => 1], request()->except('field', 'order', 'page'))) }}" 
+               class="list-group-item list-group-item-action d-flex align-items-center gap-3 py-3">
+                <i class="fas fa-sort-alpha-down text-info fa-lg" style="width: 25px;"></i>
+                <div>
+                    <h6 class="mb-0">Tipo (A-Z)</h6>
+                    <small class="text-muted">Alfabéticamente por tipo</small>
+                </div>
+            </a>
+
+            <a href="{{ route('main', array_merge(['field' => 3, 'order' => 2], request()->except('field', 'order', 'page'))) }}" 
+               class="list-group-item list-group-item-action d-flex align-items-center gap-3 py-3">
+                <i class="fas fa-sort-alpha-up text-info fa-lg" style="width: 25px;"></i>
+                <div>
+                    <h6 class="mb-0">Tipo (Z-A)</h6>
+                    <small class="text-muted">Alfabéticamente inverso</small>
+                </div>
+            </a>
+        </div>
       </div>
     </div>
   </div>

@@ -76,6 +76,12 @@
     </div>
 </div>
 
+<div class="row mt-4">
+    <div class="col-12 d-flex justify-content-center">
+        {{ $vacaciones->onEachSide(2)->links() }}
+    </div>
+</div>
+
 <form action="" method="post" id="form-delete">
     @csrf
     @method('delete')

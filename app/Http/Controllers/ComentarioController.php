@@ -77,7 +77,6 @@ class ComentarioController extends Controller {
                 'mensajeTexto' => $txtmessage,
             ];
             if($result) {
-                // Return to vacation details
                 return redirect()->route('vacacion.show', $comentario->idvacacion)->with($message);
             } else {
                 return back()->withInput()->withErrors($message);

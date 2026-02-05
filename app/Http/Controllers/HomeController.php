@@ -22,7 +22,9 @@ class HomeController extends Controller {
     }
 
     function index(): View {
-        return view('auth.home');
+        $user = Auth::user();
+        $reservas = $user->reservas()->with('vacacion.fotos')->get();
+        return view('auth.home', ['reservas' => $reservas]);
     }
 
     function update(Request $request): RedirectResponse {

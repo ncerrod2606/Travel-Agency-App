@@ -44,4 +44,11 @@ class ReservaController extends Controller {
             return back()->withInput()->withErrors($message);
         }
     }
+    function allReservations(): \Illuminate\View\View | RedirectResponse {
+        if(Auth::user()->rol != 'admin') {
+            return redirect()->route('home');
+        }
+        $users = \App\Models\User::with('reservas.vacacion')->has('reservas')->get();
+        return view('reserva.admin', ['users' => $users]);
+    }
 }

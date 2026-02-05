@@ -18,7 +18,20 @@ Route::get('inyection', [MainController::class, 'inyection'])->name('inyection')
 Route::get('image/{photo}', function($photo) {
 })->name('image.show');
 
+Route::group(['middleware' => ['verified']], function () {
+    Route::resource('reserva', ReservaController::class)->except(['create', 'edit', 'update', 'destroy']);
+    Route::get('admin/reservas', [ReservaController::class, 'allReservations'])->name('reserva.admin');
+    Route::resource('user', UserController::class);
+    // Comment routes that require verification/auth are handled by controller middleware mostly, but good to group
+    Route::post('comentario', [ComentarioController::class, 'store'])->name('comentario.store');
+    Route::get('comentario/{comentario}/edit', [ComentarioController::class, 'edit'])->name('comentario.edit');
+    Route::put('comentario/{comentario}', [ComentarioController::class, 'update'])->name('comentario.update');
+    Route::delete('comentario/{comentario}', [ComentarioController::class, 'destroy'])->name('comentario.destroy');
+});
+
+// Public or partially public routes (Controller handles specific restrictions)
 Route::resource('vacacion', VacacionController::class);
+
 Route::get('vacacion/tipo/{tipo}', [VacacionController::class, 'tipo'])->name('vacacion.tipo');
 
 Route::resource('user', UserController::class);
