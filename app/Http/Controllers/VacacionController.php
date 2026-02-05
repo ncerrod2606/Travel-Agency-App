@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\VacacionCreateRequest;
 use App\Models\Vacacion;
 use App\Models\Tipo;
-use App\Models\Foto; // Use Foto model
+use App\Models\Foto;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\UniqueConstraintViolationException;
 use Illuminate\Http\RedirectResponse;
