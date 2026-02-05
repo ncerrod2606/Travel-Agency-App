@@ -12,7 +12,7 @@ class Vacacion extends Model {
 
     protected $fillable = ['titulo', 'descripcion', 'precio', 'idtipo', 'pais'];
 
-    function getPath(): string {
+    public function getPath(): string {
         $path = url('assets/img/noimage.jpg');
         $foto = $this->fotos->first();
         if($foto != null) {

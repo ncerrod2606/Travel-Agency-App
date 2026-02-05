@@ -12,6 +12,16 @@ class Foto extends Model {
 
     protected $fillable = ['idvacacion', 'ruta'];
 
+    public function getPath(): string {
+        $path = url('assets/img/noimage.jpg');
+        if (file_exists(storage_path('app/public') . '/' . $this->ruta)) {
+            $path = url('storage/' . $this->ruta);
+        } elseif (file_exists(public_path($this->ruta))) {
+             $path = url($this->ruta);
+        }
+        return $path;
+    }
+
     public function vacacion(): BelongsTo {
         return $this->belongsTo('App\Models\Vacacion', 'idvacacion');
     }

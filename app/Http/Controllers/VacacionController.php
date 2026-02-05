@@ -163,12 +163,8 @@ class VacacionController extends Controller
         $image = $request->file('image');
         $name = $vacacion->id . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
         $ruta = $image->storeAs('vacacion', $name, 'public');
-        $this->storeLocal($image, $name);
+        $ruta = $image->storeAs('vacacion', $name, 'local');
         return $ruta;
-    }
-
-    private function storeLocal($image, $name) {
-        $image->storeAs('vacacion', $name, 'local');
     }
 
 }

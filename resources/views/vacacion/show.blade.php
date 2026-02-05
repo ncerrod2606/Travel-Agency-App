@@ -5,7 +5,7 @@
 <!-- Hero Section -->
 <div class="position-relative w-100 mb-5" style="height: 50vh; min-height: 400px; border-radius: 30px; overflow: hidden; margin-top: -20px;">
     @php
-        $bgImage = $vacacion->fotos->count() > 0 ? asset($vacacion->fotos->first()->ruta) : asset('assets/img/placeholder.jpg');
+        $bgImage = $vacacion->getPath();
     @endphp
     <div style="background-image: url('{{ $bgImage }}'); background-size: cover; background-position: center; height: 100%; width: 100%;">
         <div style="background: rgba(0,0,0,0.4); height: 100%; width: 100%; display: flex; align-items: flex-end; padding: 3rem;">
@@ -37,7 +37,7 @@
                         @foreach($vacacion->fotos->skip(1) as $foto)
                             <div class="col-md-6 mb-2">
                                 <div class="ratio ratio-4x3 rounded-4 overflow-hidden shadow-sm">
-                                    <img src="{{ asset($foto->ruta) }}" class="img-fluid object-fit-cover" alt="Gallery">
+                                    <img src="{{ $foto->getPath() }}" class="img-fluid object-fit-cover" alt="Gallery">
                                 </div>
                             </div>
                         @endforeach
