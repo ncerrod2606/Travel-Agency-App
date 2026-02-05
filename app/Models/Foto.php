@@ -12,7 +12,7 @@ class Foto extends Model {
 
     protected $fillable = ['idvacacion', 'ruta'];
 
-    function vacacion(): BelongsTo {
+    public function vacacion(): BelongsTo {
         return $this->belongsTo('App\Models\Vacacion', 'idvacacion');
     }
 }

@@ -11,11 +11,11 @@ class Comentario extends Model
     
     protected $fillable = ['iduser', 'idvacacion', 'texto'];
 
-    function vacacion(): BelongsTo {
+    public function vacacion(): BelongsTo {
         return $this->belongsTo('App\Models\Vacacion', 'idvacacion');
     }
 
-    function user(): BelongsTo {
+    public function user(): BelongsTo {
         return $this->belongsTo('App\Models\User', 'iduser');
     }
 }

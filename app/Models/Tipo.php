@@ -12,8 +12,7 @@ class Tipo extends Model {
     
     protected $fillable = ['nombre'];
 
-    //relación con el modelo Vacacion
-    function vacaciones(): HasMany {
+    public function vacaciones(): HasMany {
         return $this->hasMany('App\Models\Vacacion', 'idtipo');
     }
 }

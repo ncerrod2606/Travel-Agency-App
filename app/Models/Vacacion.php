@@ -13,7 +13,7 @@ class Vacacion extends Model {
     protected $fillable = ['titulo', 'descripcion', 'precio', 'idtipo', 'pais'];
 
     function getPath(): string {
-        $path = url('assets/img/noimage.jpg'); // Changed to noimage.jpg
+        $path = url('assets/img/noimage.jpg');
         $foto = $this->fotos->first();
         if($foto != null) {
             if (file_exists(storage_path('app/public') . '/' . $foto->ruta)) {
@@ -25,23 +25,19 @@ class Vacacion extends Model {
         return $path;
     }
 
-    //relación con el modelo Tipo
-    function tipo(): BelongsTo {
+    public function tipo(): BelongsTo {
         return $this->belongsTo('App\Models\Tipo', 'idtipo');
     }
 
-    //relación con el modelo Foto
-    function fotos(): HasMany {
+    public function fotos(): HasMany {
         return $this->hasMany('App\Models\Foto', 'idvacacion');
     }
 
-    //relación con el modelo Comentario
-    function comentarios(): HasMany {
+    public function comentarios(): HasMany {
         return $this->hasMany('App\Models\Comentario', 'idvacacion');
     }
 
-    //relación con el modelo Reserva
-    function reservas(): HasMany {
+    public function reservas(): HasMany {
         return $this->hasMany('App\Models\Reserva', 'idvacacion');
     }
 }

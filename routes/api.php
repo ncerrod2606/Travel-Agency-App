@@ -8,5 +8,5 @@ use Illuminate\Support\Facades\Route;
     return $request->user();
 })->middleware('auth:sanctum');*/
 
-Route::apiResource('peinado', ApiController::class)->names('apipeinado');
-Route::get('guzzle/{id?}', [ApiController::class, 'guzzle'])->name('apipeinado.guzzle');
+Route::apiResource('vacacion', ApiController::class)->names('apivacacion');
+Route::get('guzzle/{id?}', [ApiController::class, 'guzzle'])->name('apivacacion.guzzle');

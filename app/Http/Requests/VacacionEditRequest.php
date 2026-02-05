@@ -12,7 +12,7 @@ class VacacionEditRequest extends FormRequest
 
     function rules(): array {
         return [
-            'titulo'      => 'nullable|string|min:2|max:100', // Unique check excluded for edit or needs ignore ID
+            'titulo'      => 'nullable|string|min:2|max:100', 
             'idtipo'      => 'nullable|exists:tipo,id',
             'descripcion' => 'nullable|string|min:10',
             'precio'      => 'nullable|numeric|min:0|max:999999.99|decimal:0,2',

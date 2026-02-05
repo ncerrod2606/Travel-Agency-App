@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Peinado;
+use App\Models\Vacacion;
 use App\Traits\JsonTrait;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
@@ -14,31 +14,28 @@ class ApiController extends Controller
     use JsonTrait;
 
     function index(): JsonResponse {
-        $peinados = Peinado::all();
-        return $this->jsonResponse($peinados, 'peinado list');
+        $vacaciones = Vacacion::all();
+        return $this->jsonResponse($vacaciones, 'vacacion list');
     }
 
     function store(Request $request) {
-        //hay que validar los datos, como siempre
-        $peinado = new Peinado($request->all());
-        //$peinado->iduser = Auth::user()->id;
-        $peinado->iduser = 1;
+        $vacacion = new Vacacion($request->all());
         try {
-            $peinado->save();
+            $vacacion->save();
             $result = true;
         } catch(\Exception $e) {
-            $peinado = null;
+            $vacacion = null;
             $result = false;
         }
-        return $this->jsonResponse($peinado, 'peinado store', $result);
+        return $this->jsonResponse($vacacion, 'vacacion store', $result);
     }
 
     function show(string $id): JsonResponse {
-        $peinado = Peinado::find($id);
-        if($peinado == null) {
-            return $this->jsonResponse(null, 'peinado item', false);
+        $vacacion = Vacacion::find($id);
+        if($vacacion == null) {
+            return $this->jsonResponse(null, 'vacacion item', false);
         }
-        return $this->jsonResponse($peinado, 'peinado item');
+        return $this->jsonResponse($vacacion, 'vacacion item');
     }
 
     function update(Request $request, string $id) {
@@ -49,34 +46,18 @@ class ApiController extends Controller
 
     function guzzle($id = 0) {
         $client = new Client([
-            'base_uri' => 'https://dwes.hopto.org/',
+            'base_uri' => 'https://nico.3utilities.com/',
             'timeout'  => 5.0,
         ]);
-        //$url = "laraveles/barberApp/public/api/peinado";
         $resultado = session('guzzle', []);
-        /*if($id > 0) {
-            $url = "laraveles/barberApp/public/api/peinado/$id";
-            $response = $client->get($url);
-            $data = json_decode($response->getBody(), true);
-            $resultado[] = $data;
-            session()->put('guzzle', $resultado);
-            $id = $id - 1;
-            $url = "laraveles/barberApp/public/api/guzzle/$id";
-            $client->get($url);
-        } else {
-            dd($resultado);
-        }*/
         $resultado = [];
         while($id > 0) {
-            $url = "laraveles/barberApp/public/api/peinado/$id";
+            $url = "Travel-Agency-App/public/api/vacacion/$id";
             $response = $client->get($url);
             $data = json_decode($response->getBody(), true);
             $resultado[] = $data;
             $id = $id - 1;
         }
         dd($resultado);
-        //$response = $client->get($url);
-        //$data = json_decode($response->getBody(), true);
-        //dd($response, $data, $id);
     }
 }
